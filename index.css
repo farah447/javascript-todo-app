@@ -1,0 +1,96 @@
+*{
+    margin: 0.4rem;
+    padding: 0.4em;
+}
+button{
+   margin: 1rem; 
+}
+/* Add styles for the TODO list */
+.todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+h1{
+    font-size:36px; 
+    font-weight:700;  
+    letter-spacing:2px; 
+    width:160px; 
+    text-align:center; 
+    margin:auto; 
+    white-space:nowrap; 
+    padding-bottom:13px;
+}
+
+#todo-button {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: none;
+    background-color: #5d7cf8;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 14px;
+}
+label{
+    font-size: 20px;
+}
+#todo-input{
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: black;
+}
+input[type="text"]:hover{
+    border-color:#5d7cf8;
+}
+
+#todo-container{
+    padding: 5px;
+    color: black;
+    width: 70%;
+    background-color: white;
+    align-self: center;
+    display: block;
+    margin: 200px auto;
+    border-radius: 10px;
+    box-shadow: 6px 6px 12px #c5c5c5,
+    -1px -1px 12px white;
+}
+
+.todo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.todo p {
+    flex-grow: 1;
+    margin: 0;
+    padding: 0 10px;
+}
+
+.todo button {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: none;
+    background-color: #5d7cf8;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.todo button.edit {
+    background-color: #3498db;
+}
+
+.todo button.delete {
+    background-color: #5d7cf8;
+}
+
+.todo button:hover {
+    background-color: #394ea0;
+}

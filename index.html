@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="index.css"> 
+    <title>To-Do</title>
 </head>
 <body>
-    
+    <div id="todo-container">
+        <h1 class="app-title">Todos</h1>
+        <form id="todo-form">
+            <label for="todo-input">Enter Todo:</label>
+            <input type="text" id="todo-input" name="todo" placeholder="E.g., Learn JavaScript" />
+            <button type="submit" id="todo-button">Add Todo</button> 
+        </form>
+        <ul id="todo-list"></ul>
+        <p id="counter">Total number of todos: 0</p> 
+    </div>
+
+    <script src="index.js"></script>
 </body>
 </html>
