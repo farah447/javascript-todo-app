@@ -11,9 +11,7 @@ const addTodo = (event) => {
     const newTodo = todoInput.value;
     todos.push({ description: newTodo, completed: false }); 
     listTodos();
-
     localStorage.setItem("todos", JSON.stringify(todos));
-
     todoInput.value = '';
 };
 
@@ -67,14 +65,11 @@ const listTodos = () => {
     }
 };
 
-
-
 const completeTodo = (index) => {
     todos[index].completed = !todos[index].completed;
     listTodos();
     localStorage.setItem('todos', JSON.stringify(todos));
 };
-
 
 const editTodo = (index) => {
     const updatedTodo = prompt("Edit todo:", todos[index].description);
@@ -84,7 +79,6 @@ const editTodo = (index) => {
         localStorage.setItem('todos', JSON.stringify(todos));
     }
 };
-
 
 const deleteTodo = (index) =>{
     try{
@@ -105,7 +99,6 @@ const updateCounter = () => {
     counter.textContent = `Total number of todos: ${todos.length} | Completed Todos: ${completedCount}`;
 };
 
-
 todoForm?.addEventListener('submit', addTodo);
 listTodos();
 
@@ -114,6 +107,5 @@ const allTodos = JSON.parse(localStorage.getItem('todos'));
 if (allTodos) {
     todos = allTodos;
 }
-
 // Call listTodos to render initial todos
 listTodos();
