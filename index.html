@@ -15,8 +15,17 @@
             <input type="text" id="todo-input" name="todo" placeholder="E.g., Learn JavaScript" />
             <button type="submit" id="todo-button">Add Todo</button> 
         </form>
+        
+        <label for="search-input">Search Todo:</label>
+        <input type="text" id="search-input" name="search" placeholder="Search for todos" />
+        <div id="filter-buttons">
+            <button id="filter-all">All</button>
+            <button id="filter-active">Active</button>
+            <button id="filter-completed">Completed</button>
+        </div>
+
         <ul id="todo-list"></ul>
-        <p id="counter">Total number of todos: 0</p> 
+        <p id="counter">Total number of todos: 0</p>         
     </div>
 
     <script src="index.js"></script>
