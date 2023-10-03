@@ -4,26 +4,31 @@ const todoForm = document.getElementById("todo-form");
 const todoList = document.getElementById("todo-list");
 const counter = document.getElementById("counter");
 
-let todos =[];
+const filterAllButton = document.getElementById("filter-all");
+const filterActiveButton = document.getElementById("filter-active");
+const filterCompletedButton = document.getElementById("filter-completed");
+
+let todos = [];
+let currentFilter = "all";
 
 const addTodo = (event) => {
     event.preventDefault();
     const newTodo = todoInput.value;
-    todos.push({ description: newTodo, completed: false }); 
+    todos.push({ description: newTodo, completed: false });
     listTodos();
     localStorage.setItem("todos", JSON.stringify(todos));
     todoInput.value = '';
 };
 
 const listTodos = () => {
-    const todoList = document.getElementById("todo-list"); 
+    const todoListElement = document.getElementById("todo-list");
 
-    if (!todoList) {
+    if (!todoListElement) {
         // Handle the case where the todo-list element doesn't exist
         return;
     }
 
-    todoList.innerHTML = ''; // Clear the innerHTML
+    todoListElement.innerHTML = ''; // Clear the innerHTML
 
     if (todos.length === 0) {
         // Handle the case when there are no todos
@@ -31,7 +36,9 @@ const listTodos = () => {
         return;
     }
 
-    for (let index = 0; index < todos.length; index++) {
+    const filteredTodos = filterTodos(); 
+
+    for (let index = 0; index < filteredTodos.length; index++) {
         const todoItem = document.createElement("div");
         todoItem.classList.add("todo");
 
@@ -41,10 +48,10 @@ const listTodos = () => {
         todoItem.appendChild(todoCheckBox);
 
         const description = document.createElement("p");
-        description.textContent = todos[index].description; // Access the description property
+        description.textContent = filteredTodos[index].description; // Access the description property
         todoItem.appendChild(description);
 
-        if (todos[index].completed) {
+        if (filteredTodos[index].completed) {
             todoItem.classList.add("completed");
             todoCheckBox.checked = true;
         }
@@ -59,10 +66,10 @@ const listTodos = () => {
         deleteButton.addEventListener('click', () => deleteTodo(index));
         todoItem.appendChild(deleteButton);
 
-        todoList.appendChild(todoItem);
-
-        updateCounter();
+        todoListElement.appendChild(todoItem);
     }
+
+    updateCounter();
 };
 
 const completeTodo = (index) => {
@@ -80,16 +87,16 @@ const editTodo = (index) => {
     }
 };
 
-const deleteTodo = (index) =>{
-    try{
+const deleteTodo = (index) => {
+    try {
         if (index >= 0 && index < todos.length) {
-            todos.splice(index,1);
+            todos.splice(index, 1);
             listTodos();
             localStorage.setItem('todos', JSON.stringify(todos));
-        }else{
-            throw('invalied index number');
+        } else {
+            throw ('Invalid index number');
         }
-    } catch(error){
+    } catch (error) {
         console.error(error);
     }
 };
@@ -99,6 +106,30 @@ const updateCounter = () => {
     counter.textContent = `Total number of todos: ${todos.length} | Completed Todos: ${completedCount}`;
 };
 
+const filterTodos = () => {
+    if (currentFilter === "active") {
+        return todos.filter(todo => !todo.completed);
+    } else if (currentFilter === "completed") {
+        return todos.filter(todo => todo.completed);
+    }
+    return todos; 
+};
+
+filterAllButton.addEventListener("click", () => {
+    currentFilter = "all";
+    listTodos();
+});
+
+filterActiveButton.addEventListener("click", () => {
+    currentFilter = "active";
+    listTodos();
+});
+
+filterCompletedButton.addEventListener("click", () => {
+    currentFilter = "completed";
+    listTodos();
+});
+
 todoForm?.addEventListener('submit', addTodo);
 listTodos();
 
@@ -107,5 +138,6 @@ const allTodos = JSON.parse(localStorage.getItem('todos'));
 if (allTodos) {
     todos = allTodos;
 }
+
 // Call listTodos to render initial todos
 listTodos();
